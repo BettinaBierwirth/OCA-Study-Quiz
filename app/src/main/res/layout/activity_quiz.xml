@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    android:padding="16dp"
+    tools:context="com.bettinabierwirth.ocacatquiz.QuizActivity">
+
+    <TextView
+        android:id="@+id/text_view_question_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="Question: 1/x"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/text_view_countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="00:30"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/text_view_countdown"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="80dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_view_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/comfortaa_regular"
+                android:lineSpacingExtra="6dp"
+                android:padding="8dp"
+                android:text="Here will be the question text\nHere will be the question text\nHere will be the question text"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_view_question"
+                android:layout_centerVertical="true"
+                android:padding="8dp">
+
+
+                <CheckBox
+                    android:id="@+id/radio_button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/muted_light_blue"
+                    android:fontFamily="@font/comfortaa_regular"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Option 1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/radio_button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/muted_light_blue"
+                    android:fontFamily="@font/comfortaa_regular"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Option 2"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/radio_button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/muted_light_blue"
+                    android:fontFamily="@font/comfortaa_regular"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Option 3"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/radio_button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/muted_light_blue"
+                    android:fontFamily="@font/comfortaa_regular"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Option 4"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/radio_button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/muted_light_blue"
+                    android:fontFamily="@font/comfortaa_regular"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Option 5"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/radio_button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/muted_light_blue"
+                    android:fontFamily="@font/comfortaa_regular"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Option 6"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_confirm_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="Confirm"
+        android:textColor="@color/dark_blue"
+        android:layout_marginBottom="18dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/dark_blue"
+    tools:context="com.bettinabierwirth.ocacatquiz.MainActivity">
+
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="OCA Study Quiz"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/comfortaa_bold"
+        android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/text_view_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_title"
+        android:padding="20dp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:textSize="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="You have ninety seconds to respond to each question. If the checked answer is right, you will receive one point for each correctly answered question.\n\nIt's all or nothing.\nGood Luck!"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:lineSpacingExtra="8dp"/>
+
+
+    <Button
+        android:id="@+id/button_start_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="Start Quiz"
+        android:textColor="@color/dark_blue"
+        android:textSize="18sp" />
+
+</RelativeLayout>
