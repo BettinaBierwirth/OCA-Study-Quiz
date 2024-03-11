@@ -14,34 +14,38 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ResultActivity extends AppCompatActivity {
     private static final int totalQuestions = 8;
 
+    /**
+     * @param savedInstanceState Wenn die Aktivität nach einer vorherigen Beendigung erneut initialisiert wird,
+     * enthält dieser Bundle die zuletzt bereitgestellten Daten in {@link #onSaveInstanceState}.
+     * <b><i>Hinweis: Andernfalls ist es null.</i></b>
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        /*
-         * Ergebnis aus dem Intent abrufen
-         */
+
+        // Ergebnis aus dem Intent abrufen
+
         int score = getIntent().getIntExtra("TOTAL_SCORE", 0);
-        /*
-         * Das Ergebnis basierend auf dem Score anzeigen
-         */
+        //Das Ergebnis basierend auf dem Score anzeigen
+
         TextView resultMessage = findViewById(R.id.text_view_result_message);
         resultMessage.setText(getResultMessage(score));
 
         TextView textViewResult = findViewById(R.id.text_view_result);
         Button buttonStartQuiz = findViewById(R.id.button_start_quiz);
-        /*
-         * Setzt den OnClickListener für den Start-Quiz-Button
-         */
+
+        // Setzt den OnClickListener für den Start-Quiz-Button
+
         buttonStartQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startQuiz();
             }
         });
-        /*
-         * Zeigt die Gesamtpunktzahl an
-         */
+
+         // Zeigt die Gesamtpunktzahl an
+
         textViewResult.setText("Your Score: " + score);
     }
 
@@ -51,9 +55,9 @@ public class ResultActivity extends AppCompatActivity {
     private void startQuiz() {
         Intent intent = new Intent(ResultActivity.this, QuizActivity.class);
         startActivity(intent);
-        /*
-         * Beende die aktuelle Aktivität beim Starten eines neuen Quiz
-         */
+
+         // Beende die aktuelle Aktivität beim Starten eines neuen Quiz
+
         finish();
     }
 

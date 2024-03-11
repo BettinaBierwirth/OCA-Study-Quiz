@@ -74,9 +74,19 @@ public class Question {
         this.question = question;
     }
 
+    /**
+     *
+     * @return Die erste Antwortmöglichkeit.
+     */
+
     public String getOption1() {
         return option1;
     }
+
+    /**
+     *
+     * @param option1 Zeigt die erste Option.
+     */
 
     public void setOption1(String option1) {
         this.option1 = option1;
