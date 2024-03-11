@@ -39,7 +39,6 @@ public class QuizActivity extends AppCompatActivity {
 
     private TextView textViewQuestionCount;
     private TextView textViewCountDown;
-    private RadioGroup rbGroup;
     private CheckBox rb1;
     private CheckBox rb2;
     private CheckBox rb3;
@@ -62,7 +61,7 @@ public class QuizActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
     private int correctQuestions = 0;
-    /*
+    /**
      * Diese Methode wird aufgerufen, wenn die Aktivität erstellt wird. Hier wird die Initialisierung
      * der UI-Elemente, Datenbankzugriffe und die Konfiguration des Quiz-Spiels durchgeführt.
      *
@@ -81,7 +80,7 @@ public class QuizActivity extends AppCompatActivity {
         textViewQuestion = findViewById(R.id.text_view_question);
         textViewQuestionCount = findViewById(R.id.text_view_question_count);
         textViewCountDown = findViewById(R.id.text_view_countdown);
-        rbGroup = findViewById(R.id.radio_group);
+        RadioGroup rbGroup = findViewById(R.id.radio_group);
         rb1 = findViewById(R.id.radio_button1);
         rb2 = findViewById(R.id.radio_button2);
         rb3 = findViewById(R.id.radio_button3);
@@ -188,6 +187,7 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void showNextQuestion() {
 
         /*
@@ -304,37 +304,36 @@ public class QuizActivity extends AppCompatActivity {
 
         countDownTimer.start();
     }
-    /*
+    /**
      * Diese Methode aktualisiert die Anzeige des Countdowns basierend auf der verbleibenden Zeit.
      * Sie zeigt die Minuten und Sekunden im richtigen Format an und ändert die Textfarbe
      * basierend auf der verbleibenden Zeit.
      */
     private void updateCountDownText() {
 
-        /*
-         *  Berechnung der verbleibenden Minuten und Sekunden aus der verbleibenden Zeit in Millisekunden.
-         */
+         //  Berechnung der verbleibenden Minuten und Sekunden aus der verbleibenden Zeit in Millisekunden.
+
 
         int minutes = (int) (timeLeftInMillis / 1000) / 60;
         int seconds = (int) (timeLeftInMillis / 1000) % 60;
 
-        /*
-         * Formatierung der verbleibenden Zeit als String im HH:MM-Format.
-         */
+
+         // Formatierung der verbleibenden Zeit als String im HH:MM-Format.
+
 
         String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
-        /*
-         * Setzen des formatierten Zeitstrings in die Countdown-Anzeige.
-         */
+
+         // Setzen des formatierten Zeitstrings in die Countdown-Anzeige.
+
 
         textViewCountDown.setText(timeFormatted);
 
         if (timeLeftInMillis < 10000) {
 
-            /*
-             * Ändern der Textfarbe auf Rot, wenn die verbleibende Zeit unter 10 Sekunden liegt, sonst auf die Standardfarbe.
-             */
+
+             // Ändern der Textfarbe auf Rot, wenn die verbleibende Zeit unter 10 Sekunden liegt, sonst auf die Standardfarbe.
+
 
             textViewCountDown.setTextColor(Color.RED);
         } else {
@@ -342,16 +341,16 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
      * Diese Methode überprüft die ausgewählten Antworten des Benutzers und zeigt die Lösung an.
      * Der Antwortstatus wird auf "beantwortet" gesetzt. Falls die Frage oder die Antwortmöglichkeiten nicht verfügbar sind,
      * wird eine Toast-Nachricht mit einem Fehlerhinweis angezeigt.
      */
     private void checkAnswer() {
 
-        /*
-         * Setzen des Antwortstatus auf "beantwortet".
-         */
+
+         // Setzen des Antwortstatus auf "beantwortet".
+
 
         answered = true;
 

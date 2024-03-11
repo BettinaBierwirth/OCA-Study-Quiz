@@ -1,8 +1,8 @@
 package com.bettinabierwirth.ocacatquiz;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +19,7 @@ public class ResultActivity extends AppCompatActivity {
      * enthält dieser Bundle die zuletzt bereitgestellten Daten in {@link #onSaveInstanceState}.
      * <b><i>Hinweis: Andernfalls ist es null.</i></b>
      */
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +38,7 @@ public class ResultActivity extends AppCompatActivity {
 
         // Setzt den OnClickListener für den Start-Quiz-Button
 
-        buttonStartQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startQuiz();
-            }
-        });
+        buttonStartQuiz.setOnClickListener(v -> startQuiz());
 
          // Zeigt die Gesamtpunktzahl an
 
@@ -66,22 +62,25 @@ public class ResultActivity extends AppCompatActivity {
      *
      * @param score Die erzielte Gesamtpunktzahl
      * @return Die entsprechende Nachricht basierend auf der Gesamtpunktzahl.
-     *
      */
     private String getResultMessage(int score) {
         double percentage = (double) score / totalQuestions * 100;
+
         if (score == 0) {
-            return "You scored 0%. Try again!";
-        } else if (score >= 1 && score <= 25) {
-            return "Nice try! You scored 1-25%.";
-        } else if (score >= 26 && score <= 50) {
-            return "Good effort! You scored 26-50%.";
-        } else if (score >= 51 && score <= 75) {
-            return "Well done! You scored 51-75%.";
-        } else if (score >= 76 && score <= 99) {
-            return "Great job! You scored 76-99%.";
-        } else {
+            return "Try again. You scored 0%.";
+        } else if (score == totalQuestions) {
             return "Congratulations! You scored 100%.";
+        } else if (percentage > 0 && percentage <= 25) {
+            return "You scored 0-25%.";
+        } else if (percentage > 25 && percentage <= 50) {
+            return "You scored 25-50%.";
+        } else if (percentage > 50 && percentage <= 75) {
+            return "You scored 50-75%.";
+        } else if (percentage > 75 && percentage < 100) {
+            return "You scored 75-99%.";
+        } else {
+            return "Invalid score. Try again.";
         }
     }
 }
+
