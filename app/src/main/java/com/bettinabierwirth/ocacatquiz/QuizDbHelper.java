@@ -13,7 +13,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 /**
- * Helferklasse für die Verwaltung der Quiz-Datenbank.
+ * Helper class for managing the Quiz database.
+ * This class provides methods for creating and updating the Quiz database,
+ * inserting questions into the database, and retrieving all questions from the database.
  */
 public class QuizDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "OCAQuiz.db";
@@ -23,9 +25,9 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
 
     /**
-     * Konstruktor für den QuizDbHelper.
+     * Constructor for the QuizDbHelper.
      *
-     * @param context Der Kontext der Anwendung.
+     * @param context The context of the application.
      */
     public QuizDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,9 +37,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         this.db = db;
 
-        /*
-         * SQL Anweisung zur Erstellung der Fragen-Tabelle.
-         */
+        //SQL statement to create the questions table.
 
         final String SQL_CREATE_QUESTIONS_TABLE = "CREATE TABLE " +
                 QuizContract.QuestionsTable.TABLE_NAME + " ( " +
@@ -56,7 +56,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         fillQuestionsTable();
     }
     /**
-     * Füllt die Fragen-Tabelle mit vordefinierten Fragen.
+     * Fills the questions table with predefined questions.
      */
     private void fillQuestionsTable() {
         List<Integer> answerNr1 = Arrays.asList(1, 2, 5);
@@ -291,9 +291,9 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Fügt die Fragen zur Datenbank hinzu.
+     * Adds the question to the database.
      *
-     * @param question Die hinzuzufügende Frage.
+     * @param question The question to be added.
      */
 
     private void addQuestion(Question question) {
@@ -306,7 +306,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         cv.put(QuizContract.QuestionsTable.COLUMN_OPTION5, question.getOption5());
         cv.put(QuizContract.QuestionsTable.COLUMN_OPTION6, question.getOption6());
 
-        // Konveritert List<Integer> in einen Komma-separated string bevor dieser in der Datenbank gespeichert wird
         String answerNrsString = TextUtils.join(",", question.getAnswerNr());
         cv.put(QuizContract.QuestionsTable.COLUMN_ANSWER_NR, answerNrsString);
 
@@ -314,9 +313,42 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Gibt alle Fragen aus der Datenbank zurück.
+     * This method getAllQuestions() retrieves all the questions stored in the database.
+     * This method encapsulates the logic to retrieve all questions from the database,
+     * parse the data, and construct Question objects, providing a convenient way
+     * to access the questions throughout the application.
+     * ----------------------------------------------------------------------------------
+     *     <b>Annotation: @SuppressLint("Range")</b>
+     *         This annotation is used to suppress lint warnings,
+     *         specifically the one related to the use of Cursor
+     *         methods like getCount(), moveToFirst(), etc.
+     *     <b>Return Type: List Question</b>
+     *         This method returns a list of Question objects,
+     *         which represents all the questions stored in the database.
+     *     <b>Local Variables:</b>
+     *         questionList: An ArrayList to store the retrieved questions.
+     *         db: An instance of SQLiteDatabase obtained from getReadableDatabase().
+     *         c: A Cursor object to iterate over the result set from the database query.
+     *     <b>Database Query:</b>
+     *        The method executes a raw SQL query using db.rawQuery() to select all
+     *        rows from the QuizContract.QuestionsTable.TABLE_NAME.
+     *     <b>Cursor Iteration:</b>
+     *        It iterates over the result set using a do-while loop.
+     *        For each row in the result set:
+     *          It constructs a new Question object.
+     *          It retrieves question details (question text, options, answer numbers) from the cursor using column indices.
+     *          It constructs a list of answer numbers by parsing the comma-separated string obtained from the cursor.
+     *          It sets the retrieved question details and answer numbers to the Question object.
+     *          It adds the Question object to the questionList.
+     *      <b>Exception Handling:</b>
+     *          Any exceptions that occur during the database operation are caught.
+     *          If an exception occurs, it's printed using printStackTrace().
+     *      <b>Finally Block:</b>
+     *         It ensures that the cursor is properly closed after use.
+     *      <b>Return Statement:</b>
+     *         Finally, it returns the populated questionList.
      *
-     * @return Die Liste der Fragen.
+     * @return The list of questions.
      */
     @SuppressLint("Range")
     public List<Question> getAllQuestions() {
@@ -336,9 +368,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                     question.setOption5(c.getString(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_OPTION5)));
                     question.setOption6(c.getString(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_OPTION6)));
 
-                    /*
-                     *  Wandelt den durch Komma getrennten String wieder in List<Integer> um, um sie in der Activity zu verwenden.
-                     */
                     String answerNrsString = c.getString(c.getColumnIndex(QuizContract.QuestionsTable.COLUMN_ANSWER_NR));
                     List<Integer> answerNrs = new ArrayList<>();
                     String[] answerNrsArray = answerNrsString.split(",");
@@ -351,9 +380,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 } while (c.moveToNext());
             }
         } catch (Exception e) {
-            /*
-             * Exception wird geworfen, wenn der Cursor nicht gelesen werden kann.
-             */
+
             e.printStackTrace();
         } finally {
             if (c != null && !c.isClosed()) {
@@ -363,11 +390,12 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         return questionList;
     }
 
+    /**
+     * This method returns the number of questions stored in the database.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        /*
-         * Löscht die alten Daten und erstellt neue.
-         */
+
         db.execSQL("DROP TABLE IF EXISTS " + QuizContract.QuestionsTable.TABLE_NAME);
         onCreate(db);
     }
