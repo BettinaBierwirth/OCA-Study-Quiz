@@ -23,13 +23,33 @@ public class Question {
      * the indices of the correct answer(s) among the options.
      */
     private String question;
-
+    /**
+     * Represents the first option string.
+     */
     private String option1;
+    /**
+     * Represents the second option string.
+     */
     private String option2;
+    /**
+     * Represents the third option string.
+     */
     private String option3;
+    /**
+     * Represents the fourth option string.
+     */
     private String option4;
+    /**
+     * Represents the fifth option string.
+     */
     private String option5;
+    /**
+     * Represents the sixth option string.
+     */
     private String option6;
+    /**
+     *Represents a list of integers corresponding to answer numbers.
+     */
     private List<Integer> answerNr;
 
     /**

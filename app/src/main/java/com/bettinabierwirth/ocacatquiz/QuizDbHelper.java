@@ -18,8 +18,17 @@ import java.util.List;
  * inserting questions into the database, and retrieving all questions from the database.
  */
 public class QuizDbHelper extends SQLiteOpenHelper {
+    /**
+     * Represents the name of the database.
+     */
     private static final String DATABASE_NAME = "OCAQuiz.db";
+    /**
+     * Represents the version of the database.
+     */
     private static final int DATABASE_VERSION = 1;
+    /**
+     * Represents the SQLiteDatabase object for database operations.
+     */
 
     private SQLiteDatabase db;
 

@@ -26,40 +26,110 @@ import java.util.Locale;
 public class QuizActivity extends AppCompatActivity {
 
     /**
-     * Initialization of variables.
+     * Represents the duration of the countdown timer in milliseconds.
      */
     private static final long COUNTDOWN_IN_MILLIS = 90000;
+    /**
+     * Represents the maximum number of questions.
+     */
     private static final int MAX_QUESTIONS = 8;
+    /**
+     * Represents the TextView displaying the question.
+     */
     private TextView textViewQuestion;
 
+    /**
+     * Represents the TextView displaying the question count.
+     */
+
     private TextView textViewQuestionCount;
+
+    /**
+     * Represents the TextView displaying the countdown timer.
+     */
     private TextView textViewCountDown;
+    /**
+     * Represents the first checkbox option.
+     */
     private CheckBox rb1;
+    /**
+     * Represents the second checkbox option.
+     */
     private CheckBox rb2;
+    /**
+     * Represents the third checkbox option.
+     */
     private CheckBox rb3;
+    /**
+     * Represents the fourth checkbox option.
+     */
     private CheckBox rb4;
+    /**
+     * Represents the fifth checkbox option.
+     */
     private CheckBox rb5;
+    /**
+     * Represents the sixth checkbox option.
+     */
     private CheckBox rb6;
+    /**
+     * Represents the button for confirming and moving to the next question.
+     */
     private Button buttonConfirmNext;
+    /**
+     * Represents the default text color for radio buttons.
+     */
     private ColorStateList textColorDefaultRb;
+
+    /**
+     * Represents the default text color for checkboxes.
+     */
     private ColorStateList textColorDefaultCb;
+    /**
+     * Represents a list of integers storing selected answers.
+     */
     private List<Integer> selectedAnswers;
+    /**
+     * Represents a list of Question objects.
+     */
     private List<Question> questionList;
+    /**
+     * Represents the counter for the current question.
+     */
     private int questionCounter;
+    /**
+     * Represents the total count of questions. It's 0 at the start of the counter.
+     */
     private int questionCountTotal = 0;
+    /**
+     * Represents the currently displayed question.
+     */
     private Question currentQuestion;
+    /**
+     * Indicates whether the current question has been answered.
+     */
     private boolean answered;
+    /**
+     * Represents the default text color for countdown timer.
+     */
     private ColorStateList textColorDefaultCd;
+    /**
+     * Represents the CountDownTimer object.
+     */
     private CountDownTimer countDownTimer;
+    /**
+     * Represents the time left in milliseconds for the countdown timer.
+     */
     private long timeLeftInMillis;
+    /**
+     * Represents the number of correctly answered questions. it#s 0 at the start of the quiz.
+     */
     private int correctQuestions = 0;
     /**
-     * This method is called when the activity is created. It performs the initialization
-     * of UI elements, database access, and configuration of the quiz game.
-     *
-     * @param savedInstanceState A Bundle object containing the activity's previous state.
-     * __________________________________________________________________________________
-     *<b>Set Content View:</b>
+     *This method is called when the activity is created. It performs the initialization
+     *of UI elements, database access, and configuration of the quiz game.
+     *@param savedInstanceState A Bundle object containing the activity's previous state.
+     *<br><b>Set Content View:</b>
      *<i>setContentView(R.layout.activity_quiz);:</i>
      *Sets the content view of the activity to the layout defined in activity_quiz.xml.
      *<b>Initialize UI Elements:</b>
@@ -169,7 +239,7 @@ public class QuizActivity extends AppCompatActivity {
      * Unchecks all RadioButtons, resetting their state.
      *<b>Load Next Question:</b>
      *Checks if there are more questions to display
-     *(if (questionCounter < Math.min(MAX_QUESTIONS, questionCountTotal))).
+     *(if (questionCounter  &lt;  Math.min(MAX_QUESTIONS, questionCountTotal))).
      *<b>If there are more questions:</b>
      *Retrieves the next question from the questionList.
      *Sets the question text and options in their respective TextViews and RadioButtons.
@@ -242,6 +312,10 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *Starts the countdown timer.
+     */
+
     private void startCountDown() {
 
         countDownTimer.start();
@@ -265,7 +339,7 @@ public class QuizActivity extends AppCompatActivity {
      * Sets the formatted time string to the textViewCountDown TextView,
      * updating the countdown display.
      *<b>Change Text Color:</b>
-     *Checks if the remaining time is less than 10 seconds (timeLeftInMillis < 10000).
+     *Checks if the remaining time is less than 10 seconds (timeLeftInMillis  &lt; 10000).
      *If true, sets the text color of textViewCountDown to red (Color.RED) to indicate
      * that time is running out.
      *If false, sets the text color of textViewCountDown back to the
@@ -295,35 +369,34 @@ public class QuizActivity extends AppCompatActivity {
     /**
      * This method, checkAnswer(), is responsible for validating the user's selected
      * answers against the correct answers for the current question and showing
-     * the solution. Let's go through each part of the method:
-     *<b>Mark as Answered:</b>
+     * the solution.<br>
+     *<b>Mark as Answered:</b><br>
      *answered = true;: Sets the answered flag to true,
-     * indicating that the user has provided an answer.
-     *<b>Check for Null Question or Answers:</b>
-     *if (currentQuestion != null && currentQuestion.getAnswerNr() != null) { ... }:
-     * Checks if the current question object and its answer numbers are not null.
-     *<b>Initialize Selected Answers List:</b>
-     *selectedAnswers = new ArrayList<>();: Initializes a new ArrayList to store
-     * the selected answer numbers.
-     *<b>Check CheckBox States:</b>
+     * indicating that the user has provided an answer.<br>
+     *<b>Check for Null Question or Answers:</b><br>
+     *if (currentQuestion != null &amp;&amp; currentQuestion.getAnswerNr() != null) { ... }:
+     * Checks if the current question object and its answer numbers are not null.<br>
+     *<b>Initialize Selected Answers List:</b><br>
+     *selectedAnswers = new ArrayList &lt;&gt; ();: Initializes a new ArrayList to store
+     * the selected answer numbers.<br>
+     *<b>Check CheckBox States:</b><br>
      *Checks each CheckBox to see if it is checked. If it is,
-     * the corresponding answer number is added to the selectedAnswers list.
-     * <b>Show Solution:</b>
+     * the corresponding answer number is added to the selectedAnswers list.<br>
+     * <b>Show Solution:</b><br>
      * Calls the showSolution() method to display the correct
-     * and incorrect answers to the user.
-     *<b>Check if Answer is Correct:</b>
+     * and incorrect answers to the user.<br>
+     *<b>Check if Answer is Correct:</b><br>
      *Compares the size and content of the selectedAnswers list with the
      * correct answer numbers (currentQuestion.getAnswerNr()).
      * If they match, it means the user provided all correct answers,
-     * and the correctQuestions counter is incremented.
-     *<b>Handle Null or Incomplete Questions:</b>
+     * and the correctQuestions counter is incremented.<br>
+     *<b>Handle Null or Incomplete Questions:</b><br>
      *If the current question or its answer numbers are null,
-     * it displays a toast message indicating an error.
-     *------------------------------------------------------------------------
+     * it displays a toast message indicating an error.<br>
      * Overall, this method ensures that the user's selected answers are validated
      * against the correct answers, and appropriate feedback is provided to the user.
      * If there are any issues with the question or its answers, it handles them
-     * by displaying an error message.
+     * by displaying an error message.<br>
      */
     private void checkAnswer() {
         answered = true;
@@ -348,37 +421,37 @@ public class QuizActivity extends AppCompatActivity {
 
     /**
      * This method, showSolution(), is responsible for displaying the correct and incorrect
-     * answers after the user has answered a question. Let's break down each part of the method:
-     * <b>Disable CheckBoxes:</b>
+     * answers after the user has answered a question.<br>
+     * <b>Disable CheckBoxes:</b><br>
      * rb1.setEnabled(false);, rb2.setEnabled(false);, ..., rb6.setEnabled(false);:
      * Disables all the CheckBoxes so the user cannot change their selections
-     * after answering the question.
-     *<b>Set Default Text Color:</b>
+     * after answering the question.<br>
+     *<b>Set Default Text Color:</b><br>
      *rb1.setTextColor(textColorDefaultCb);, rb2.setTextColor(textColorDefaultCb);, ...,
      * rb6.setTextColor(textColorDefaultCb);: Sets the text color of all CheckBoxes
-     * to the default color, restoring them to their original state.
-     * <b>Highlight Correct Answers:</b>
+     * to the default color, restoring them to their original state.<br>
+     * <b>Highlight Correct Answers:</b><br>
      * for (int i : currentQuestion.getAnswerNr()) { switch (i) { ... } }:
      * Iterates over the list of correct answer numbers for the current question.
      * Inside the loop, it switches based on the correct answer number and sets
      * the text color of the corresponding CheckBox to green (Color.GREEN).
-     * This highlights the correct answers.
-     *<b>Highlight Incorrect Answers:</b>
+     * This highlights the correct answers.<br>
+     *<b>Highlight Incorrect Answers:</b><br>
      * for (int i : selectedAnswers) { if (!currentQuestion.getAnswerNr().contains(i))
      * { switch (i) { ... } } }: Iterates over the list of selected answers by the user.
      * Checks if the selected answer is not present in the list of correct answers for
-     * the current question.
+     * the current question.<br>
      * If it's not correct, it switches based on the selected answer number and sets the
      * text color of the corresponding CheckBox to red (Color.RED). This highlights the
-     * incorrect answers.
-     *<b>Update Button Text:</b>
-     *if (questionCounter < questionCountTotal) { buttonConfirmNext.setText(R.string.next); }
+     * incorrect answers.<br>
+     *<b>Update Button Text:</b><br>
+     *if (questionCounter  &lt; questionCountTotal) { buttonConfirmNext.setText(R.string.next); }
      * else { buttonConfirmNext.setText(R.string.finish); }: Updates the text of the
      * confirmation button based on whether there are more questions remaining (R.string.next)
-     * or if it's the last question (R.string.finish).
+     * or if it's the last question (R.string.finish).<br>
      * Overall, this method provides visual feedback to the user about which answers
      * they got right and wrong after answering a question. It disables further interaction
-     * with the CheckBoxes and updates the button text accordingly.
+     * with the CheckBoxes and updates the button text accordingly.<br>
      */
     private void showSolution() {
 
@@ -451,7 +524,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     /**
-     * Finishes the quiz and passes the user's results to the ResultActivity.
+     * Finishes the quiz and passes the user's results to the ResultActivity.<br>
      * The total score equals the number of correct questions. Optionally, the total score
      * and the number of correct questions can be passed to the ResultActivity. After forwarding
      * the results, the current quiz activity is finished.
