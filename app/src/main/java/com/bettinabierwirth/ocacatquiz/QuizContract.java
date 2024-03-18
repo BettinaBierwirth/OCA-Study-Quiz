@@ -2,7 +2,7 @@ package com.bettinabierwirth.ocacatquiz;
 
 import android.provider.BaseColumns;
 /**
- * In summary, the QuizContract class acts as a contract defining the
+ * The QuizContract class acts as a contract defining the
  * structure of the database tables used in the OCat Quiz application.
  * It ensures consistency in table structure and column names across
  * different parts of the application, making it easier to maintain
